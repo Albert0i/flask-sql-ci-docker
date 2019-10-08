@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  cookiecutter:
+    build:
+      context: .
+      args: 
+        repo: ${TEMPLATE_REPO_URL}
+        repo_release_version: ${REPO_RELEASE_VERSION}
+        python_image_version: ${PYTHON_IMAGE_VERSION}
+    image: ${DOCKER_USERNAME}/cookiecutter:${APP_VERSION}-initiator
+    container_name: ${CONTAINER_NAME}
+    command: tail -f /dev/null
