@@ -25,6 +25,7 @@ help:
 	@echo "	dev-ps  	list development containers"
 	@echo "	dev-logs 	follow development logs"
 	@echo "	prune-all	prune image, container, network, volume and remove migration folder"
+	@echo "	test-run 	run the test with Docker Compose"
 
 #
 # Generate project codebase form GitHub using cookiecutter
@@ -86,6 +87,15 @@ prune-all:
 	rm -rf ./$(APP_NAME)/migrations
 
 #
-# EOF (2019/10/04)
+# Run tests
+#
+test-run:
+	docker-compose -f docker/dev/docker-compose.yml up -d
+	sleep 10
+	docker-compose -f docker/dev/docker-compose.yml exec web flask test
+	docker-compose -f docker/dev/docker-compose.yml down 
+
+#
+# EOF (2019/10/08)
 #
 
